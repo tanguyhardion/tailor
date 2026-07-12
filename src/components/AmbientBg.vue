@@ -22,7 +22,19 @@
         :key="`bolt-${n}`" 
         class="lightning-flash" 
         :style="getLightningStyle(n)"
-      ></div>
+      >
+        <!-- Realistic, thin branching lightning path -->
+        <svg class="lightning-bolt" viewBox="0 0 100 100" preserveAspectRatio="none">
+          <!-- Main bolt -->
+          <path d="M50,0 L45,15 L58,28 L40,45 L52,60 L35,80 L48,90 L40,100" 
+                class="bolt-main" vector-effect="non-scaling-stroke" />
+          <!-- Small branches -->
+          <path d="M58,28 L70,35 L65,45" 
+                class="bolt-branch" vector-effect="non-scaling-stroke" />
+          <path d="M40,45 L25,55 L28,65" 
+                class="bolt-branch" vector-effect="non-scaling-stroke" />
+        </svg>
+      </div>
     </div>
   </div>
 </template>
@@ -57,11 +69,26 @@ const getRandomRainStyle = () => {
   };
 };
 
-// Stagger lightning flashes with different delays and durations
+/**
+ * MODIFIED ONLY THIS FUNCTION
+ * Randomize lightning orientation by adding rotation and scaleX
+ */
 const getLightningStyle = (index) => {
   const delay = 1 + index * 3.5 + Math.random() * 2;
   const duration = 6 + Math.random() * 4;
+  const left = 10 + Math.random() * 80; 
+  const scaleY = 0.6 + Math.random() * 0.4; 
+  const scaleX = 0.5 + Math.random() * 1; 
+  const flip = Math.random() > 0.5 ? 1 : -1; 
+
+  // Introduce random rotation for true orientation change (top-bottom, bottom-left, bottom-right)
+  const rotation = (Math.random() * 60) - 30; // Random angle between -30deg and +30deg
+
   return {
+    left: `${left}%`,
+    // Combined transforms: scale density, flip direction, AND rotate orientation
+    transform: `scaleX(${flip * scaleX}) scaleY(${scaleY}) rotate(${rotation}deg)`, 
+    transformOrigin: 'top center',
     animationDelay: `${delay}s`,
     animationDuration: `${duration}s`
   };
@@ -230,31 +257,46 @@ const getLightningStyle = (index) => {
   pointer-events: none;
 }
 
+/* Snappier, less opaque flashes for realism */
 @keyframes lightningFlash {
   0%   { opacity: 0; }
   1%   { opacity: 0; }
-  1.5% { opacity: 0.7; }
-  2%   { opacity: 0; }
-  2.5% { opacity: 0.5; }
-  3%   { opacity: 0; }
-  3.3% { opacity: 0.3; }
-  3.6% { opacity: 0; }
+  1.1% { opacity: 0.75; }
+  1.3% { opacity: 0; }
+  1.5% { opacity: 0.4; }
+  1.7% { opacity: 0; }
+  1.9% { opacity: 0.2; }
+  2.1% { opacity: 0; }
   100% { opacity: 0; }
 }
 
 .lightning-flash {
   position: absolute;
   top: 0;
-  left: 0;
+  width: 80px; /* Width container for branches */
+  height: 60vh;
+  opacity: 0;
+  animation: lightningFlash 8s infinite;
+  will-change: opacity, transform;
+}
+
+.lightning-bolt {
   width: 100%;
   height: 100%;
-  background: radial-gradient(
-    ellipse at 50% 0%,
-    rgba(180, 160, 255, 0.35) 0%,
-    rgba(120, 100, 220, 0.12) 30%,
-    transparent 70%
-  );
-  animation: lightningFlash 8s infinite;
-  will-change: opacity;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  /* Subtle glow */
+  filter: drop-shadow(0 0 6px rgba(180, 160, 255, 0.6));
+}
+
+.bolt-main {
+  stroke: rgba(255, 255, 255, 0.9);
+  stroke-width: 1.5px;
+}
+
+.bolt-branch {
+  stroke: rgba(230, 230, 255, 0.6);
+  stroke-width: 1px;
 }
 </style>
