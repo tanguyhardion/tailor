@@ -91,19 +91,11 @@
         <div class="item-details">
           <span class="item-category text-gold">Timepiece</span>
           <span class="item-name watch-name">{{ outfit.watch.type }}</span>
-          <p class="watch-reason">{{ outfit.watch.reason }}</p>
         </div>
       </div>
     </div>
 
-    <!-- Stylist explanation -->
-    <div class="stylist-block">
-      <div class="stylist-title">
-        <Sparkles class="icon-sparkles" />
-        <span>Stylist Notes</span>
-      </div>
-      <p class="explanation-text">{{ outfit.explanation }}</p>
-    </div>
+
   </div>
 </template>
 
@@ -280,7 +272,7 @@ const getOutfitStyleName = () => {
 }
 
 .watch-name {
-  color: var(--accent-gold);
+  color: var(--text-primary);
   font-weight: 600;
 }
 
