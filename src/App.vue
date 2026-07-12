@@ -35,42 +35,74 @@
 
         <!-- Results Mode -->
         <div v-else class="results-wrapper">
-          <!-- Back button -->
+          <!-- Back button / Toggles -->
           <div class="results-actions animate-fade-in">
             <button class="btn-text" @click="resetForm">
               <ArrowLeft class="icon-back" />
+              New Wardrobe Search
+            </button>
+            <button class="btn-text mobile-only-toggle" @click="toggleSidebar">
+              <Sliders class="icon-sliders" />
               Adjust Preferences
             </button>
           </div>
 
-          <!-- Weather Card -->
-          <WeatherCard 
-            :weatherData="weather" 
-            :locationName="cityInfo.name" 
-            :timeLabel="formattedTimeLabel"
-          />
+          <div class="results-container">
+            <!-- Left: Weather and Recommendations -->
+            <div class="results-main" :class="{ 'is-updating': updating }">
+              <!-- Weather Card -->
+              <WeatherCard 
+                :weatherData="weather" 
+                :locationName="cityInfo.name" 
+                :timeLabel="formattedTimeLabel"
+              />
 
-          <!-- Recommendations Title -->
-          <div class="section-title-wrapper animate-fade-in delay-2">
-            <span class="luxury-tag">Curated Options</span>
-            <h2 class="luxury-header results-section-title">Outfit Suggestions</h2>
-          </div>
+              <!-- Recommendations Title -->
+              <div class="section-title-wrapper animate-fade-in delay-2">
+                <span class="luxury-tag">Curated Options</span>
+                <h2 class="luxury-header results-section-title">Outfit Suggestions</h2>
+              </div>
 
-          <!-- Recommendations Grid -->
-          <div class="cards-layout">
-            <div 
-              v-for="(outfit, idx) in recommendations" 
-              :key="idx" 
-              class="card-col"
-            >
-              <OutfitCard 
-                :outfit="outfit" 
-                :index="idx" 
-                :delay="3 + idx * 1.5"
-                :occasion="preferenceDetails.occasion"
+              <!-- Recommendations Grid -->
+              <div class="cards-layout">
+                <div 
+                  v-for="(outfit, idx) in recommendations" 
+                  :key="idx" 
+                  class="card-col"
+                >
+                  <OutfitCard 
+                    :outfit="outfit" 
+                    :index="idx" 
+                    :delay="0.5 + idx * 0.3"
+                    :occasion="preferenceDetails.occasion"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: Persistent/Slide-out Preferences Sidebar -->
+            <div class="results-sidebar" :class="{ 'open': isSidebarOpen }">
+              <div class="sidebar-header mobile-only">
+                <span class="luxury-tag">Refine Coordinates</span>
+                <button class="btn-close-sidebar" @click="closeSidebar" aria-label="Close sidebar">
+                  <X class="icon-close" />
+                </button>
+              </div>
+              <PreferenceForm 
+                :loading="updating" 
+                isSidebar 
+                :initialValues="preferenceDetails"
+                @change="handlePreferencesChange" 
               />
             </div>
           </div>
+          
+          <!-- Mobile Sidebar Backdrop -->
+          <Teleport to="body">
+            <Transition name="fade">
+              <div v-if="isSidebarOpen" class="sidebar-backdrop" @click="closeSidebar"></div>
+            </Transition>
+          </Teleport>
         </div>
       </Transition>
     </main>
@@ -84,7 +116,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { Sparkles, ArrowLeft } from '@lucide/vue';
+import { Sparkles, ArrowLeft, Sliders, X } from '@lucide/vue';
 import AmbientBg from './components/AmbientBg.vue';
 import PreferenceForm from './components/PreferenceForm.vue';
 import WeatherCard from './components/WeatherCard.vue';
@@ -95,11 +127,21 @@ import { getOutfitRecommendations } from './services/recommender';
 // App States
 const submitted = ref(false);
 const loading = ref(false);
+const updating = ref(false);
+const isSidebarOpen = ref(false);
 const weather = ref(null);
 const recommendations = ref([]);
 
 const cityInfo = ref(null);
 const preferenceDetails = ref(null);
+
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
+
+const closeSidebar = () => {
+  isSidebarOpen.value = false;
+};
 
 // Ambient background selector
 const currentWeatherType = ref('sunny');
@@ -164,6 +206,45 @@ const handleGenerate = async (details) => {
   } catch (error) {
     console.error("Failed to generate outfit:", error);
     loading.value = false;
+  }
+};
+
+const handlePreferencesChange = async (details) => {
+  updating.value = true;
+  preferenceDetails.value = details;
+  cityInfo.value = details.city;
+
+  try {
+    const weatherData = await fetchWeather(
+      details.city.latitude,
+      details.city.longitude,
+      details.date,
+      details.startHour,
+      details.endHour
+    );
+    weather.value = weatherData;
+
+    const desc = getWeatherDescription(weatherData.weatherCode);
+    const avgHour = (details.startHour + details.endHour) / 2;
+    
+    if (avgHour >= 22 || avgHour < 6) {
+      currentWeatherType.value = 'night';
+    } else {
+      currentWeatherType.value = desc.type;
+    }
+
+    const items = getOutfitRecommendations(
+      weatherData,
+      details.occasion,
+      details.startHour,
+      details.endHour
+    );
+    recommendations.value = items;
+
+  } catch (error) {
+    console.error("Failed to update outfit preferences:", error);
+  } finally {
+    updating.value = false;
   }
 };
 
@@ -233,8 +314,8 @@ const resetForm = () => {
 
 .results-actions {
   display: flex;
-  justify-content: flex-start;
-  max-width: 1000px;
+  justify-content: space-between;
+  max-width: 1200px;
   margin: 0 auto;
   width: 100%;
 }
@@ -368,6 +449,128 @@ const resetForm = () => {
   color: var(--text-muted);
   background: rgba(8, 8, 10, 0.5);
   margin-top: 40px;
+}
+
+.results-container {
+  display: flex;
+  gap: 32px;
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.results-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  transition: opacity 0.3s ease;
+  min-width: 0;
+}
+
+.results-main.is-updating {
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.results-sidebar {
+  width: 340px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 24px;
+  height: fit-content;
+}
+
+/* Hide mobile elements by default */
+.mobile-only, .mobile-only-toggle, .sidebar-backdrop {
+  display: none;
+}
+
+.icon-sliders, .icon-close {
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 1024px) {
+  .results-container {
+    flex-direction: column;
+  }
+  
+  .results-sidebar {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 360px;
+    max-width: 85vw;
+    height: 100vh;
+    background: rgba(18, 18, 22, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-left: 1px solid var(--border-muted);
+    border-top: none;
+    border-bottom: none;
+    border-radius: 0;
+    padding: 32px 24px;
+    transform: translateX(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 1000;
+    overflow-y: auto;
+    box-shadow: none;
+  }
+  
+  .results-sidebar.open {
+    transform: translateX(0);
+    box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+  }
+  
+  .mobile-only {
+    display: block;
+  }
+  
+  .mobile-only-toggle {
+    display: flex;
+  }
+  
+  .sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-muted);
+    padding-bottom: 16px;
+  }
+  
+  .btn-close-sidebar {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-muted);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-secondary);
+    transition: var(--transition-fast);
+  }
+
+  .btn-close-sidebar:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--text-primary);
+  }
+  
+  .sidebar-backdrop {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(4, 4, 6, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 999;
+  }
 }
 
 /* Transitions */

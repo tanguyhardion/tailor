@@ -17,7 +17,7 @@ const MOCK_CITIES = [
 function getMockWeather(lat, lon, dateStr, startHour, endHour) {
   const date = new Date(dateStr);
   const month = date.getMonth(); // 0-11
-  
+
   // Find closest city or default
   let city = MOCK_CITIES.find(c => Math.abs(c.latitude - lat) < 2 && Math.abs(c.longitude - lon) < 2);
   if (!city) {
@@ -127,15 +127,15 @@ export function getWeatherDescription(code) {
 
 export async function searchLocations(query) {
   if (!query || query.trim().length < 2) return [];
-  
+
   try {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query)}&count=5&language=en&format=json`;
     const response = await fetch(url);
     if (!response.ok) throw new Error("Geocoding failed");
-    
+
     const data = await response.json();
     if (!data.results) return [];
-    
+
     return data.results.map(r => ({
       name: `${r.name}, ${r.admin1 ? r.admin1 + ', ' : ''}${r.country}`,
       latitude: r.latitude,
@@ -147,8 +147,8 @@ export async function searchLocations(query) {
     console.warn("Geocoding API failed, falling back to mock search:", error);
     // Offline filter mock
     const q = query.toLowerCase();
-    return MOCK_CITIES.filter(c => 
-      c.name.toLowerCase().includes(q) || 
+    return MOCK_CITIES.filter(c =>
+      c.name.toLowerCase().includes(q) ||
       c.country.toLowerCase().includes(q)
     ).map(c => ({
       name: `${c.name}, ${c.country}`,
@@ -168,7 +168,7 @@ export async function fetchWeather(lat, lon, dateStr, startHour, endHour) {
     const today = new Date();
     const diffTime = Math.abs(targetDate - today);
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    
+
     if (diffDays > 7) {
       console.log(`Date is ${diffDays} days away. Using seasonal climatology fallback.`);
       return getMockWeather(lat, lon, dateStr, startHour, endHour);
@@ -177,14 +177,14 @@ export async function fetchWeather(lat, lon, dateStr, startHour, endHour) {
     const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,precipitation_probability,wind_speed_10m,weather_code&timezone=auto`;
     const response = await fetch(url);
     if (!response.ok) throw new Error("Weather API failed");
-    
+
     const data = await response.json();
     if (!data.hourly) throw new Error("Invalid response format");
 
     // Match the target date and hours in hourly timeline
     const hourly = data.hourly;
     const targetDayStr = targetDate.toISOString().split("T")[0]; // YYYY-MM-DD
-    
+
     const indices = [];
     hourly.time.forEach((timeStr, idx) => {
       // timeStr is like "2026-07-12T00:00"
@@ -209,7 +209,7 @@ export async function fetchWeather(lat, lon, dateStr, startHour, endHour) {
     const avgTemp = temps.reduce((a, b) => a + b, 0) / temps.length;
     const maxRain = Math.max(...rainProbs);
     const maxWind = Math.max(...windSpeeds);
-    
+
     // Mode of weather codes (most frequent)
     const codeCounts = {};
     let modeCode = codes[0];

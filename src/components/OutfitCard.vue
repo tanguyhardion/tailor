@@ -100,7 +100,7 @@
 </template>
 
 <script setup>
-import { Shirt, Layers, Scissors, Footprints, Watch, Sparkles } from '@lucide/vue';
+import { Shirt, Layers, Scissors, Footprints, Watch } from '@lucide/vue';
 
 const props = defineProps({
   outfit: {
@@ -276,40 +276,4 @@ const getOutfitStyleName = () => {
   font-weight: 600;
 }
 
-.watch-reason {
-  font-size: 0.8rem;
-  line-height: 1.4;
-  color: var(--text-secondary);
-  margin-top: 4px;
-}
-
-/* Stylist Notes Section */
-.stylist-block {
-  margin-top: 24px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-muted);
-}
-
-.stylist-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.75rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: var(--accent-gold);
-  margin-bottom: 6px;
-}
-
-.icon-sparkles {
-  width: 14px;
-  height: 14px;
-}
-
-.explanation-text {
-  font-size: 0.85rem;
-  line-height: 1.5;
-  color: var(--text-secondary);
-}
 </style>

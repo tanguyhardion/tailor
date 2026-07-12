@@ -93,7 +93,7 @@
       </div>
 
       <!-- Submit Button -->
-      <button type="submit" class="btn-gold w-100 mt-4" :disabled="loading">
+      <button v-if="!isSidebar" type="submit" class="btn-gold w-100 mt-4" :disabled="loading">
         <span v-if="loading" class="spinner-container">
           <svg class="spinner" viewBox="0 0 50 50">
             <circle class="path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle>
@@ -102,13 +102,17 @@
         </span>
         <span v-else>Generate Outfit Ideas</span>
       </button>
+      <div v-else class="sidebar-info-tag">
+        <Sparkles class="icon-sparkles-inline animate-pulse-slow" />
+        <span>Adjusting coordinates in real-time</span>
+      </div>
     </form>
   </div>
 </template>
 
 <script setup>
 import { ref, onMounted, computed, watch } from 'vue';
-import { MapPin, Calendar } from '@lucide/vue';
+import { MapPin, Calendar, Sparkles } from '@lucide/vue';
 import { searchLocations } from '../services/weather';
 import HourPicker from './HourPicker.vue';
 
@@ -116,10 +120,18 @@ const props = defineProps({
   loading: {
     type: Boolean,
     default: false
+  },
+  isSidebar: {
+    type: Boolean,
+    default: false
+  },
+  initialValues: {
+    type: Object,
+    default: null
   }
 });
 
-const emit = defineEmits(['generate']);
+const emit = defineEmits(['generate', 'change']);
 
 // Form states
 const locationQuery = ref('Paris, France');
@@ -205,6 +217,15 @@ const capitalize = (str) => {
 
 // Close suggestions on outside click
 onMounted(() => {
+  if (props.initialValues) {
+    locationQuery.value = props.initialValues.city?.name || '';
+    selectedCity.value = props.initialValues.city || null;
+    selectedDate.value = props.initialValues.date || todayString;
+    startHour.value = props.initialValues.startHour ?? 9;
+    endHour.value = props.initialValues.endHour ?? 17;
+    selectedOccasion.value = props.initialValues.occasion || 'casual';
+  }
+
   document.addEventListener('click', (e) => {
     const inputWrapper = document.querySelector('.relative');
     if (inputWrapper && !inputWrapper.contains(e.target)) {
@@ -212,6 +233,20 @@ onMounted(() => {
     }
   });
 });
+watch(
+  [selectedCity, selectedDate, startHour, endHour, selectedOccasion],
+  ([city, date, start, end, occasion]) => {
+    if (city && props.isSidebar) {
+      emit('change', {
+        city,
+        date,
+        startHour: start,
+        endHour: end,
+        occasion
+      });
+    }
+  }
+);
 
 const handleSubmit = () => {
   if (!selectedCity.value) return;
@@ -413,5 +448,35 @@ input, select {
   0% { stroke-dasharray: 1, 150; stroke-dashoffset: 0; }
   50% { stroke-dasharray: 90, 150; stroke-dashoffset: -35; }
   100% { stroke-dasharray: 90, 150; stroke-dashoffset: -124; }
+}
+@keyframes pulse-slow {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 2s infinite ease-in-out;
+}
+
+.sidebar-info-tag {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(229, 193, 88, 0.05);
+  border: 1px dashed rgba(229, 193, 88, 0.2);
+  color: var(--accent-gold);
+  font-size: 0.8rem;
+  padding: 12px;
+  border-radius: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.icon-sparkles-inline {
+  width: 14px;
+  height: 14px;
 }
 </style>

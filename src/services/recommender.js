@@ -57,65 +57,30 @@ export function recommendWatch(outfit, occasion, rainProbability) {
   // If raining, or casual occasion, dive watch is a strong match
   if (rainProbability > 40 || occasion === "casual") {
     return {
-      type: "Dive Watch",
-      reason: "Featuring a rugged steel bracelet, rotating bezel, and high water resistance, this timepiece adds a sporty, functional anchor to your casual outfit."
+      type: "Dive Watch"
     };
   }
 
   // Formal dinner/work
   if (formalness >= 6 || occasion === "dinner") {
     return {
-      type: "Dress Watch",
-      reason: "Its slim profile, polished gold or steel bezel, and minimalist leather strap perfectly align with the refined, tailored elegance of this formal outfit."
+      type: "Dress Watch"
     };
   }
 
   // Smart casual work or date
   if (occasion === "work" || (formalness >= 3 && formalness < 6)) {
     return {
-      type: "Everyday Watch",
-      reason: "With its robust steel bracelet, simple black or blue dial, and versatile design, this timepiece balances professionalism and casual sophistication."
+      type: "Everyday Watch"
     };
   }
 
   // Date, Party, or stylish casual
   return {
-    type: "Chronograph",
-    reason: "Featuring stopwatch sub-dials and a leather or metal bracelet, this watch adds a masculine, detailed, and stylish accent suitable for an evening out."
+    type: "Chronograph"
   };
 }
 
-// Generate styling explanation paragraph
-function generateExplanation(outfit, weather, occasion, timesOfDay) {
-  const temp = weather.temperature;
-  let tempDesc = "warm";
-  if (temp < 10) tempDesc = "cold";
-  else if (temp < 18) tempDesc = "cool";
-  else if (temp < 25) tempDesc = "mild";
-
-  const topName = outfit.top.name;
-  const bottomName = outfit.bottom.name;
-  const shoesName = outfit.shoes.name;
-  const layerName = outfit.layer ? outfit.layer.name : null;
-
-  let justification = "";
-
-  if (layerName) {
-    justification = `For a ${tempDesc} day, layering the ${topName} under the ${layerName} ensures optimal insulation and a smart, dimensional look. `;
-  } else {
-    justification = `The lightweight ${topName} is worn standalone, keeping things breathable for the ${tempDesc} weather. `;
-  }
-
-  if (weather.rainProbability > 40) {
-    justification += `We've selected ${shoesName} to keep your feet dry and protected from the rain, bypassing delicate materials like suede. `;
-  } else {
-    justification += `The ${shoesName} provide an elegant ground that matches the ${bottomName}. `;
-  }
-
-  justification += `Color-wise, the contrast between the ${outfit.topColor.name} top and ${outfit.bottomColor.name} bottom creates a harmonious palette ideal for ${occasion} wear during the ${timesOfDay.join(' or ')}.`;
-
-  return justification;
-}
 
 // Core Recommender Function
 export function getOutfitRecommendations(weather, occasion, startHour, endHour) {
@@ -371,7 +336,6 @@ export function getOutfitRecommendations(weather, occasion, startHour, endHour) 
       seenCombinations.add(signature);
       
       const watch = recommendWatch(o, occasion, rainProb);
-      const explanation = generateExplanation(o, weather, occasion, timesOfDay);
       
       uniqueRecommendations.push({
         top: o.top,
@@ -379,7 +343,6 @@ export function getOutfitRecommendations(weather, occasion, startHour, endHour) 
         bottom: o.bottom,
         shoes: o.shoes,
         watch,
-        explanation,
         score: o.score,
         totalClo: o.totalClo,
         targetClo: o.targetClo
