@@ -1,891 +1,493 @@
 {
   "categories": [
-    {
-      "id": "shirt",
-      "name": "Shirts",
-      "types": ["casual", "formal", "oxford", "linen"]
-    },
-    {
-      "id": "polo",
-      "name": "Polo Shirts",
-      "types": ["casual", "sport"]
-    },
-    {
-      "id": "tshirt",
-      "name": "T-Shirts",
-      "types": ["casual", "athletic"]
-    },
-    {
-      "id": "overshirt",
-      "name": "Overshirts",
-      "types": ["casual", "layering"]
-    },
-    {
-      "id": "sweater",
-      "name": "Sweaters",
-      "types": ["casual", "formal", "athletic"]
-    },
-    {
-      "id": "jacket",
-      "name": "Jackets",
-      "types": ["casual", "formal", "outdoor", "windproof", "waterproof"]
-    },
-    {
-      "id": "trousers",
-      "name": "Trousers",
-      "types": ["formal", "casual", "business"]
-    },
-    {
-      "id": "jeans",
-      "name": "Jeans",
-      "types": ["casual", "dark", "light"]
-    },
-    {
-      "id": "chinos",
-      "name": "Chinos",
-      "types": ["casual", "business-casual"]
-    },
-    {
-      "id": "shorts",
-      "name": "Shorts",
-      "types": ["casual", "athletic"]
-    },
-    {
-      "id": "shoes",
-      "name": "Shoes",
-      "types": ["formal", "casual", "outdoor", "athletic"]
-    }
+    { "id": 1, "name": "t-shirt", "type": "top" },
+    { "id": 2, "name": "shirt", "type": "top" },
+    { "id": 3, "name": "polo", "type": "top" },
+    { "id": 4, "name": "overshirt", "type": "layer" },
+    { "id": 5, "name": "sweater", "type": "layer" },
+    { "id": 6, "name": "jacket", "type": "layer" },
+    { "id": 7, "name": "coat", "type": "layer" },
+    { "id": 8, "name": "trousers", "type": "bottom" },
+    { "id": 9, "name": "jeans", "type": "bottom" },
+    { "id": 10, "name": "shoes", "type": "shoes" }
+  ],
+  "colors": [
+    { "id": 1, "name": "white", "hex": "#FFFFFF", "group": "neutral_light" },
+    { "id": 2, "name": "navy", "hex": "#1E2A38", "group": "neutral_dark" },
+    { "id": 3, "name": "black", "hex": "#121212", "group": "neutral_dark" },
+    { "id": 4, "name": "grey", "hex": "#8E8E93", "group": "neutral_light" },
+    { "id": 5, "name": "olive", "hex": "#4A5D4E", "group": "earth" },
+    { "id": 6, "name": "beige", "hex": "#D2B48C", "group": "neutral_light" },
+    { "id": 7, "name": "brown", "hex": "#5C4033", "group": "earth" },
+    { "id": 8, "name": "burgundy", "hex": "#800020", "group": "accent" },
+    { "id": 9, "name": "sky_blue", "hex": "#87CEEB", "group": "accent" },
+    { "id": 10, "name": "tan", "hex": "#CD9A62", "group": "earth" },
+    { "id": 11, "name": "charcoal", "hex": "#36454F", "group": "neutral_dark" }
+  ],
+  "materials": [
+    { "id": 1, "name": "linen", "warmth_index": 0.8 },
+    { "id": 2, "name": "cotton", "warmth_index": 1.0 },
+    { "id": 3, "name": "wool", "warmth_index": 1.4 },
+    { "id": 4, "name": "cashmere", "warmth_index": 1.5 },
+    { "id": 5, "name": "denim", "warmth_index": 1.1 },
+    { "id": 6, "name": "leather", "warmth_index": 1.3 },
+    { "id": 7, "name": "suede", "warmth_index": 1.2 },
+    { "id": 8, "name": "flannel", "warmth_index": 1.2 },
+    { "id": 9, "name": "waxed cotton", "warmth_index": 1.3 }
+  ],
+  "fits": [
+    { "id": 1, "name": "slim" },
+    { "id": 2, "name": "straight" },
+    { "id": 3, "name": "relaxed" }
   ],
   "items": [
     {
-      "id": "shirt-white-cotton",
-      "category": "shirt",
-      "description": "White cotton long-sleeve shirt",
-      "color": "white",
-      "material": "cotton",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [10, 28],
-      "occasions": ["work", "casual", "dinner", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "thermal"],
-        "canLayerUnder": ["sweater", "jacket", "overshirt"]
-      },
-      "colorHarmony": ["navy", "black", "gray", "khaki", "beige"]
+      "id": 1,
+      "name": "white linen long-sleeve shirt",
+      "category_id": 2,
+      "color_id": 1,
+      "material_id": 1,
+      "fit_id": 2,
+      "min_temp": 20,
+      "max_temp": 35,
+      "suitable_occasions": ["casual", "date", "party", "dinner"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "base",
+      "clo_value": 0.20
     },
     {
-      "id": "shirt-blue-oxford",
-      "category": "shirt",
-      "description": "Light blue oxford cloth shirt",
-      "color": "blue",
-      "material": "oxford cotton",
-      "fit": "regular",
-      "type": "oxford",
-      "temperatureRange": [12, 26],
-      "occasions": ["work", "casual", "dinner"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "thermal"],
-        "canLayerUnder": ["sweater", "jacket"]
-      },
-      "colorHarmony": ["white", "navy", "gray", "khaki"]
+      "id": 2,
+      "name": "beige short-sleeve linen shirt",
+      "category_id": 2,
+      "color_id": 6,
+      "material_id": 1,
+      "fit_id": 3,
+      "min_temp": 22,
+      "max_temp": 38,
+      "suitable_occasions": ["casual", "party"],
+      "suitable_times": ["morning", "afternoon"],
+      "layering": "standalone",
+      "clo_value": 0.15
     },
     {
-      "id": "shirt-navy-formal",
-      "category": "shirt",
-      "description": "Navy formal dress shirt",
-      "color": "navy",
-      "material": "cotton-polyester blend",
-      "fit": "slim",
-      "type": "formal",
-      "temperatureRange": [14, 25],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt"],
-        "canLayerUnder": ["vest", "jacket"]
-      },
-      "colorHarmony": ["white", "burgundy", "black", "charcoal"]
+      "id": 3,
+      "name": "sky blue cotton Oxford shirt",
+      "category_id": 2,
+      "color_id": 9,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 15,
+      "max_temp": 25,
+      "suitable_occasions": ["work", "date", "dinner", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "base",
+      "clo_value": 0.25
     },
     {
-      "id": "shirt-linen-beige",
-      "category": "shirt",
-      "description": "Beige linen short-sleeve shirt",
-      "color": "beige",
-      "material": "linen",
-      "fit": "relaxed",
-      "type": "linen",
-      "temperatureRange": [18, 32],
-      "occasions": ["casual", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "khaki", "brown"]
+      "id": 4,
+      "name": "navy cotton Oxford shirt",
+      "category_id": 2,
+      "color_id": 2,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 15,
+      "max_temp": 25,
+      "suitable_occasions": ["work", "date", "dinner", "party"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "base",
+      "clo_value": 0.25
     },
     {
-      "id": "polo-navy",
-      "category": "polo",
-      "description": "Navy polo shirt",
-      "color": "navy",
-      "material": "cotton-blend piqué",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [15, 28],
-      "occasions": ["casual", "work", "date", "sports"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt"],
-        "canLayerUnder": ["overshirt", "light-jacket"]
-      },
-      "colorHarmony": ["white", "gray", "khaki", "beige"]
+      "id": 5,
+      "name": "white cotton crewneck T-shirt",
+      "category_id": 1,
+      "color_id": 1,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 18,
+      "max_temp": 35,
+      "suitable_occasions": ["casual", "date", "party"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "base",
+      "clo_value": 0.15
     },
     {
-      "id": "polo-white",
-      "category": "polo",
-      "description": "White polo shirt",
-      "color": "white",
-      "material": "cotton-blend piqué",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [16, 30],
-      "occasions": ["casual", "work", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt"],
-        "canLayerUnder": ["overshirt", "sweater"]
-      },
-      "colorHarmony": ["navy", "black", "gray", "khaki"]
+      "id": 6,
+      "name": "grey cotton crewneck T-shirt",
+      "category_id": 1,
+      "color_id": 4,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 18,
+      "max_temp": 35,
+      "suitable_occasions": ["casual", "party"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "base",
+      "clo_value": 0.15
     },
     {
-      "id": "tshirt-white",
-      "category": "tshirt",
-      "description": "White classic t-shirt",
-      "color": "white",
-      "material": "cotton",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [16, 32],
-      "occasions": ["casual", "outdoor", "sports"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": ["shirt", "overshirt", "jacket", "sweater"]
-      },
-      "colorHarmony": ["navy", "black", "gray", "olive"]
+      "id": 7,
+      "name": "black cotton crewneck T-shirt",
+      "category_id": 1,
+      "color_id": 3,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 18,
+      "max_temp": 32,
+      "suitable_occasions": ["casual", "date", "party", "dinner"],
+      "suitable_times": ["afternoon", "evening", "night"],
+      "layering": "base",
+      "clo_value": 0.15
     },
     {
-      "id": "tshirt-navy",
-      "category": "tshirt",
-      "description": "Navy classic t-shirt",
-      "color": "navy",
-      "material": "cotton",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [16, 32],
-      "occasions": ["casual", "outdoor", "sports"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": ["shirt", "overshirt", "jacket", "sweater"]
-      },
-      "colorHarmony": ["white", "gray", "khaki", "beige"]
+      "id": 8,
+      "name": "olive green piqué polo shirt",
+      "category_id": 3,
+      "color_id": 5,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 18,
+      "max_temp": 30,
+      "suitable_occasions": ["work", "casual", "date"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "standalone",
+      "clo_value": 0.20
     },
     {
-      "id": "tshirt-black",
-      "category": "tshirt",
-      "description": "Black classic t-shirt",
-      "color": "black",
-      "material": "cotton",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [16, 32],
-      "occasions": ["casual", "date", "party"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": ["shirt", "overshirt", "jacket", "sweater"]
-      },
-      "colorHarmony": ["white", "navy", "gray", "charcoal"]
+      "id": 9,
+      "name": "navy piqué polo shirt",
+      "category_id": 3,
+      "color_id": 2,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 18,
+      "max_temp": 30,
+      "suitable_occasions": ["work", "casual", "date", "dinner"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "standalone",
+      "clo_value": 0.20
     },
     {
-      "id": "overshirt-tan",
-      "category": "overshirt",
-      "description": "Tan overshirt jacket",
-      "color": "tan",
-      "material": "cotton twill",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [8, 22],
-      "occasions": ["casual", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "polo", "shirt"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["white", "navy", "cream", "brown"]
+      "id": 10,
+      "name": "charcoal flannel long-sleeve shirt",
+      "category_id": 2,
+      "color_id": 11,
+      "material_id": 8,
+      "fit_id": 2,
+      "min_temp": 8,
+      "max_temp": 18,
+      "suitable_occasions": ["casual", "date", "work"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "base",
+      "clo_value": 0.30
     },
     {
-      "id": "overshirt-olive",
-      "category": "overshirt",
-      "description": "Olive overshirt jacket",
-      "color": "olive",
-      "material": "cotton twill",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [8, 22],
-      "occasions": ["casual", "outdoor", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "polo", "cream shirt"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["cream", "navy", "khaki", "brown"]
+      "id": 11,
+      "name": "navy blue wool crewneck sweater",
+      "category_id": 5,
+      "color_id": 2,
+      "material_id": 3,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 16,
+      "suitable_occasions": ["work", "dinner", "date", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "mid",
+      "clo_value": 0.45
     },
     {
-      "id": "overshirt-navy",
-      "category": "overshirt",
-      "description": "Navy overshirt jacket",
-      "color": "navy",
-      "material": "cotton twill",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [8, 22],
-      "occasions": ["casual", "work", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "polo", "white shirt"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["white", "cream", "tan", "khaki"]
+      "id": 12,
+      "name": "grey cashmere V-neck sweater",
+      "category_id": 5,
+      "color_id": 4,
+      "material_id": 4,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 16,
+      "suitable_occasions": ["work", "dinner", "date", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "mid",
+      "clo_value": 0.45
     },
     {
-      "id": "sweater-gray-crew",
-      "category": "sweater",
-      "description": "Gray crew neck sweater",
-      "color": "gray",
-      "material": "merino wool blend",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [5, 18],
-      "occasions": ["casual", "work", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "shirt", "polo"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["white", "navy", "black", "beige"]
+      "id": 13,
+      "name": "burgundy merino wool crewneck sweater",
+      "category_id": 5,
+      "color_id": 8,
+      "material_id": 3,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 16,
+      "suitable_occasions": ["dinner", "date", "casual", "party"],
+      "suitable_times": ["afternoon", "evening", "night"],
+      "layering": "mid",
+      "clo_value": 0.45
     },
     {
-      "id": "sweater-navy-vneck",
-      "category": "sweater",
-      "description": "Navy v-neck sweater",
-      "color": "navy",
-      "material": "merino wool blend",
-      "fit": "slim",
-      "type": "formal",
-      "temperatureRange": [6, 18],
-      "occasions": ["casual", "work", "dinner", "date"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "shirt"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["white", "cream", "gray", "burgundy"]
+      "id": 14,
+      "name": "beige cotton-linen overshirt",
+      "category_id": 4,
+      "color_id": 6,
+      "material_id": 1,
+      "fit_id": 3,
+      "min_temp": 15,
+      "max_temp": 24,
+      "suitable_occasions": ["casual", "date", "party"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "mid",
+      "clo_value": 0.30
     },
     {
-      "id": "sweater-charcoal-polo",
-      "category": "sweater",
-      "description": "Charcoal polo neck sweater",
-      "color": "charcoal",
-      "material": "merino wool",
-      "fit": "regular",
-      "type": "formal",
-      "temperatureRange": [4, 16],
-      "occasions": ["casual", "work", "dinner"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["shirt"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["white", "navy", "gray", "black"]
+      "id": 15,
+      "name": "olive cotton utility overshirt",
+      "category_id": 4,
+      "color_id": 5,
+      "material_id": 2,
+      "fit_id": 3,
+      "min_temp": 12,
+      "max_temp": 22,
+      "suitable_occasions": ["casual", "date", "party"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "mid",
+      "clo_value": 0.35
     },
     {
-      "id": "sweater-cream",
-      "category": "sweater",
-      "description": "Cream cable knit sweater",
-      "color": "cream",
-      "material": "cotton-wool blend",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [5, 18],
-      "occasions": ["casual", "date", "dinner"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "shirt"],
-        "canLayerUnder": ["jacket"]
-      },
-      "colorHarmony": ["navy", "brown", "tan", "charcoal"]
+      "id": 16,
+      "name": "black leather bomber jacket",
+      "category_id": 6,
+      "color_id": 3,
+      "material_id": 6,
+      "fit_id": 2,
+      "min_temp": 8,
+      "max_temp": 18,
+      "suitable_occasions": ["date", "party", "dinner", "casual"],
+      "suitable_times": ["evening", "night"],
+      "layering": "outer",
+      "clo_value": 0.60
     },
     {
-      "id": "jacket-navy-blazer",
-      "category": "jacket",
-      "description": "Navy blazer",
-      "color": "navy",
-      "material": "wool-blend",
-      "fit": "tailored",
-      "type": "formal",
-      "temperatureRange": [3, 20],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["shirt", "sweater"],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "cream", "gray", "burgundy"]
+      "id": 17,
+      "name": "tan suede trucker jacket",
+      "category_id": 6,
+      "color_id": 10,
+      "material_id": 7,
+      "fit_id": 2,
+      "min_temp": 10,
+      "max_temp": 20,
+      "suitable_occasions": ["date", "casual", "party"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "outer",
+      "clo_value": 0.60
     },
     {
-      "id": "jacket-charcoal-blazer",
-      "category": "jacket",
-      "description": "Charcoal blazer",
-      "color": "charcoal",
-      "material": "wool-blend",
-      "fit": "tailored",
-      "type": "formal",
-      "temperatureRange": [3, 20],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["shirt", "sweater"],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "cream", "light blue", "burgundy"]
+      "id": 18,
+      "name": "navy water-resistant trench coat",
+      "category_id": 7,
+      "color_id": 2,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 15,
+      "suitable_occasions": ["work", "dinner", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "outer",
+      "clo_value": 0.70
     },
     {
-      "id": "jacket-black-casual",
-      "category": "jacket",
-      "description": "Black casual jacket",
-      "color": "black",
-      "material": "cotton twill",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [5, 18],
-      "occasions": ["casual", "date", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "shirt", "sweater"],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "gray", "cream"]
+      "id": 19,
+      "name": "grey wool overcoat",
+      "category_id": 7,
+      "color_id": 4,
+      "material_id": 3,
+      "fit_id": 2,
+      "min_temp": -5,
+      "max_temp": 10,
+      "suitable_occasions": ["work", "dinner", "date", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "outer",
+      "clo_value": 0.85
     },
     {
-      "id": "jacket-bomber-olive",
-      "category": "jacket",
-      "description": "Olive bomber jacket",
-      "color": "olive",
-      "material": "nylon",
-      "fit": "relaxed",
-      "type": "casual",
-      "temperatureRange": [6, 19],
-      "occasions": ["casual", "outdoor", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["tshirt", "polo", "shirt"],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["cream", "white", "khaki", "brown"]
+      "id": 20,
+      "name": "dark green waxed cotton jacket",
+      "category_id": 6,
+      "color_id": 5,
+      "material_id": 9,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 15,
+      "suitable_occasions": ["casual", "date"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "outer",
+      "clo_value": 0.65
     },
     {
-      "id": "jacket-rain-black",
-      "category": "jacket",
-      "description": "Black waterproof rain jacket",
-      "color": "black",
-      "material": "polyester with waterproof coating",
-      "fit": "regular",
-      "type": "waterproof",
-      "temperatureRange": [2, 20],
-      "occasions": ["casual", "outdoor", "work"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["shirt", "sweater", "jacket"],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["any"]
+      "id": 21,
+      "name": "sand linen trousers",
+      "category_id": 8,
+      "color_id": 6,
+      "material_id": 1,
+      "fit_id": 3,
+      "min_temp": 20,
+      "max_temp": 38,
+      "suitable_occasions": ["casual", "date", "party"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "standalone",
+      "clo_value": 0.20
     },
     {
-      "id": "jacket-windbreaker-navy",
-      "category": "jacket",
-      "description": "Navy windproof jacket",
-      "color": "navy",
-      "material": "nylon",
-      "fit": "regular",
-      "type": "windproof",
-      "temperatureRange": [4, 18],
-      "occasions": ["casual", "outdoor", "work"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": ["shirt", "sweater", "jacket"],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "gray", "khaki"]
+      "id": 22,
+      "name": "navy cotton chinos",
+      "category_id": 8,
+      "color_id": 2,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 10,
+      "max_temp": 26,
+      "suitable_occasions": ["work", "dinner", "date", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.30
     },
     {
-      "id": "trousers-navy-business",
-      "category": "trousers",
-      "description": "Navy business trousers",
-      "color": "navy",
-      "material": "wool-blend",
-      "fit": "tailored",
-      "type": "formal",
-      "temperatureRange": [2, 20],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "blue", "gray", "black"]
+      "id": 23,
+      "name": "olive cotton chinos",
+      "category_id": 8,
+      "color_id": 5,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 10,
+      "max_temp": 26,
+      "suitable_occasions": ["work", "casual", "date"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "standalone",
+      "clo_value": 0.30
     },
     {
-      "id": "trousers-charcoal-business",
-      "category": "trousers",
-      "description": "Charcoal business trousers",
-      "color": "charcoal",
-      "material": "wool-blend",
-      "fit": "tailored",
-      "type": "formal",
-      "temperatureRange": [2, 20],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "light blue", "cream", "burgundy"]
+      "id": 24,
+      "name": "dark grey wool trousers",
+      "category_id": 8,
+      "color_id": 4,
+      "material_id": 3,
+      "fit_id": 2,
+      "min_temp": 0,
+      "max_temp": 18,
+      "suitable_occasions": ["work", "dinner", "date"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.40
     },
     {
-      "id": "trousers-gray-business",
-      "category": "trousers",
-      "description": "Gray business trousers",
-      "color": "gray",
-      "material": "wool-blend",
-      "fit": "tailored",
-      "type": "formal",
-      "temperatureRange": [2, 20],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "black", "burgundy"]
+      "id": 25,
+      "name": "black straight-fit denim jeans",
+      "category_id": 9,
+      "color_id": 3,
+      "material_id": 5,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 22,
+      "suitable_occasions": ["casual", "date", "party", "dinner", "work"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.35
     },
     {
-      "id": "trousers-khaki-casual",
-      "category": "trousers",
-      "description": "Khaki casual trousers",
-      "color": "khaki",
-      "material": "cotton twill",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [8, 26],
-      "occasions": ["casual", "work", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "blue", "brown"]
+      "id": 26,
+      "name": "dark wash indigo denim jeans",
+      "category_id": 9,
+      "color_id": 2,
+      "material_id": 5,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 22,
+      "suitable_occasions": ["casual", "date", "party", "work"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.35
     },
     {
-      "id": "jeans-dark-skinny",
-      "category": "jeans",
-      "description": "Dark denim skinny jeans",
-      "color": "dark indigo",
-      "material": "denim",
-      "fit": "skinny",
-      "type": "dark",
-      "temperatureRange": [5, 25],
-      "occasions": ["casual", "date", "party"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "gray", "navy", "black"]
+      "id": 27,
+      "name": "light wash relaxed-fit jeans",
+      "category_id": 9,
+      "color_id": 9,
+      "material_id": 5,
+      "fit_id": 3,
+      "min_temp": 12,
+      "max_temp": 25,
+      "suitable_occasions": ["casual", "party"],
+      "suitable_times": ["morning", "afternoon"],
+      "layering": "standalone",
+      "clo_value": 0.35
     },
     {
-      "id": "jeans-dark-straight",
-      "category": "jeans",
-      "description": "Dark denim straight-fit jeans",
-      "color": "dark indigo",
-      "material": "denim",
-      "fit": "straight",
-      "type": "dark",
-      "temperatureRange": [5, 25],
-      "occasions": ["casual", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "gray", "black"]
+      "id": 28,
+      "name": "minimalist white leather sneakers",
+      "category_id": 10,
+      "color_id": 1,
+      "material_id": 2,
+      "fit_id": 2,
+      "min_temp": 10,
+      "max_temp": 35,
+      "suitable_occasions": ["casual", "date", "party", "work"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "standalone",
+      "clo_value": 0.10
     },
     {
-      "id": "jeans-light-regular",
-      "category": "jeans",
-      "description": "Light wash regular-fit jeans",
-      "color": "light blue",
-      "material": "denim",
-      "fit": "regular",
-      "type": "light",
-      "temperatureRange": [10, 28],
-      "occasions": ["casual", "date"],
-      "timeOfDay": ["morning", "afternoon"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "brown", "tan"]
+      "id": 29,
+      "name": "dark brown suede loafers",
+      "category_id": 10,
+      "color_id": 7,
+      "material_id": 7,
+      "fit_id": 2,
+      "min_temp": 12,
+      "max_temp": 30,
+      "suitable_occasions": ["work", "date", "dinner", "party", "casual"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.10
     },
     {
-      "id": "chinos-khaki",
-      "category": "chinos",
-      "description": "Khaki chinos",
-      "color": "khaki",
-      "material": "cotton twill",
-      "fit": "slim",
-      "type": "casual",
-      "temperatureRange": [8, 28],
-      "occasions": ["casual", "work", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "blue", "navy", "brown"]
+      "id": 30,
+      "name": "black leather Chelsea boots",
+      "category_id": 10,
+      "color_id": 3,
+      "material_id": 6,
+      "fit_id": 2,
+      "min_temp": 0,
+      "max_temp": 18,
+      "suitable_occasions": ["date", "party", "dinner", "casual", "work"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.15
     },
     {
-      "id": "chinos-olive",
-      "category": "chinos",
-      "description": "Olive chinos",
-      "color": "olive",
-      "material": "cotton twill",
-      "fit": "slim",
-      "type": "casual",
-      "temperatureRange": [8, 28],
-      "occasions": ["casual", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["cream", "white", "navy", "brown"]
+      "id": 31,
+      "name": "tan suede Chelsea boots",
+      "category_id": 10,
+      "color_id": 10,
+      "material_id": 7,
+      "fit_id": 2,
+      "min_temp": 5,
+      "max_temp": 20,
+      "suitable_occasions": ["date", "casual", "party"],
+      "suitable_times": ["morning", "afternoon", "evening"],
+      "layering": "standalone",
+      "clo_value": 0.15
     },
     {
-      "id": "chinos-navy",
-      "category": "chinos",
-      "description": "Navy chinos",
-      "color": "navy",
-      "material": "cotton twill",
-      "fit": "slim",
-      "type": "casual",
-      "temperatureRange": [8, 28],
-      "occasions": ["casual", "work", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "cream", "blue", "burgundy"]
-    },
-    {
-      "id": "shorts-khaki",
-      "category": "shorts",
-      "description": "Khaki shorts",
-      "color": "khaki",
-      "material": "cotton",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [18, 35],
-      "occasions": ["casual", "outdoor", "date"],
-      "timeOfDay": ["morning", "afternoon"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "light blue", "brown"]
-    },
-    {
-      "id": "shorts-navy",
-      "category": "shorts",
-      "description": "Navy shorts",
-      "color": "navy",
-      "material": "cotton",
-      "fit": "regular",
-      "type": "casual",
-      "temperatureRange": [18, 35],
-      "occasions": ["casual", "outdoor", "date"],
-      "timeOfDay": ["morning", "afternoon"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "cream", "light blue", "tan"]
-    },
-    {
-      "id": "shoes-oxford-black",
-      "category": "shoes",
-      "description": "Black leather oxford shoes",
-      "color": "black",
-      "material": "leather",
-      "fit": "formal",
-      "type": "formal",
-      "temperatureRange": [5, 30],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["navy", "charcoal", "white", "burgundy"]
-    },
-    {
-      "id": "shoes-oxford-brown",
-      "category": "shoes",
-      "description": "Brown leather oxford shoes",
-      "color": "brown",
-      "material": "leather",
-      "fit": "formal",
-      "type": "formal",
-      "temperatureRange": [5, 30],
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["khaki", "cream", "navy", "gray"]
-    },
-    {
-      "id": "shoes-loafer-brown",
-      "category": "shoes",
-      "description": "Brown leather loafers",
-      "color": "brown",
-      "material": "leather",
-      "fit": "casual",
-      "type": "casual",
-      "temperatureRange": [8, 28],
-      "occasions": ["casual", "work", "date", "dinner"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["khaki", "navy", "tan", "beige"]
-    },
-    {
-      "id": "shoes-loafer-navy",
-      "category": "shoes",
-      "description": "Navy leather loafers",
-      "color": "navy",
-      "material": "leather",
-      "fit": "casual",
-      "type": "casual",
-      "temperatureRange": [8, 28],
-      "occasions": ["casual", "work", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "khaki", "cream", "tan"]
-    },
-    {
-      "id": "shoes-sneakers-white",
-      "category": "shoes",
-      "description": "White leather sneakers",
-      "color": "white",
-      "material": "leather-canvas",
-      "fit": "casual",
-      "type": "casual",
-      "temperatureRange": [8, 32],
-      "occasions": ["casual", "date", "outdoor", "sports"],
-      "timeOfDay": ["morning", "afternoon"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["navy", "black", "gray", "khaki"]
-    },
-    {
-      "id": "shoes-sneakers-black",
-      "category": "shoes",
-      "description": "Black leather sneakers",
-      "color": "black",
-      "material": "leather-canvas",
-      "fit": "casual",
-      "type": "casual",
-      "temperatureRange": [8, 32],
-      "occasions": ["casual", "date", "party", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "gray", "any"]
-    },
-    {
-      "id": "shoes-boots-brown",
-      "category": "shoes",
-      "description": "Brown leather boots",
-      "color": "brown",
-      "material": "leather",
-      "fit": "casual",
-      "type": "casual",
-      "temperatureRange": [2, 15],
-      "occasions": ["casual", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["khaki", "navy", "cream", "tan"]
-    },
-    {
-      "id": "shoes-boots-black",
-      "category": "shoes",
-      "description": "Black leather boots",
-      "color": "black",
-      "material": "leather",
-      "fit": "casual",
-      "type": "casual",
-      "temperatureRange": [2, 15],
-      "occasions": ["casual", "date", "party", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "gray", "cream"]
-    },
-    {
-      "id": "shoes-chelsea-brown",
-      "category": "shoes",
-      "description": "Brown suede Chelsea boots",
-      "color": "brown",
-      "material": "suede",
-      "fit": "formal",
-      "type": "casual",
-      "temperatureRange": [5, 20],
-      "occasions": ["casual", "date", "dinner", "work"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["khaki", "navy", "cream", "gray"]
-    },
-    {
-      "id": "shoes-chelsea-black",
-      "category": "shoes",
-      "description": "Black suede Chelsea boots",
-      "color": "black",
-      "material": "suede",
-      "fit": "formal",
-      "type": "casual",
-      "temperatureRange": [5, 20],
-      "occasions": ["casual", "date", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "layeringCompatibility": {
-        "canWearOver": [],
-        "canLayerUnder": []
-      },
-      "colorHarmony": ["white", "navy", "cream", "gray"]
-    }
-  ],
-  "watches": [
-    {
-      "id": "watch-dress-silver",
-      "type": "Dress",
-      "description": "Silver dress watch with leather strap",
-      "color": "silver",
-      "material": "stainless steel",
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "colorHarmony": ["black", "navy", "charcoal"]
-    },
-    {
-      "id": "watch-dress-gold",
-      "type": "Dress",
-      "description": "Gold dress watch with leather strap",
-      "color": "gold",
-      "material": "gold-plated",
-      "occasions": ["work", "dinner", "party"],
-      "timeOfDay": ["afternoon", "evening"],
-      "colorHarmony": ["navy", "brown", "tan"]
-    },
-    {
-      "id": "watch-everyday-black",
-      "type": "Everyday",
-      "description": "Black everyday watch with rubber strap",
-      "color": "black",
-      "material": "stainless steel",
-      "occasions": ["casual", "work", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "colorHarmony": ["any"]
-    },
-    {
-      "id": "watch-everyday-navy",
-      "type": "Everyday",
-      "description": "Navy everyday watch with fabric strap",
-      "color": "navy",
-      "material": "stainless steel",
-      "occasions": ["casual", "work", "date", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "colorHarmony": ["white", "navy", "khaki"]
-    },
-    {
-      "id": "watch-chronograph-black",
-      "type": "Chronograph",
-      "description": "Black chronograph sports watch",
-      "color": "black",
-      "material": "stainless steel",
-      "occasions": ["casual", "sports", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "colorHarmony": ["white", "navy", "gray"]
-    },
-    {
-      "id": "watch-chronograph-silver",
-      "type": "Chronograph",
-      "description": "Silver chronograph sports watch",
-      "color": "silver",
-      "material": "stainless steel",
-      "occasions": ["casual", "sports", "outdoor", "work"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "colorHarmony": ["any"]
-    },
-    {
-      "id": "watch-dive-black",
-      "type": "Dive",
-      "description": "Black dive watch with rubber strap",
-      "color": "black",
-      "material": "stainless steel",
-      "occasions": ["casual", "sports", "outdoor"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "colorHarmony": ["white", "navy", "gray", "orange"]
-    },
-    {
-      "id": "watch-dive-blue",
-      "type": "Dive",
-      "description": "Blue dive watch with rubber strap",
-      "color": "blue",
-      "material": "stainless steel",
-      "occasions": ["casual", "sports", "outdoor", "date"],
-      "timeOfDay": ["morning", "afternoon", "evening"],
-      "colorHarmony": ["white", "navy", "khaki"]
+      "id": 32,
+      "name": "black leather Oxford dress shoes",
+      "category_id": 10,
+      "color_id": 3,
+      "material_id": 6,
+      "fit_id": 2,
+      "min_temp": 0,
+      "max_temp": 25,
+      "suitable_occasions": ["work", "dinner"],
+      "suitable_times": ["morning", "afternoon", "evening", "night"],
+      "layering": "standalone",
+      "clo_value": 0.10
     }
   ]
 }
