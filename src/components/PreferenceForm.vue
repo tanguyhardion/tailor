@@ -57,27 +57,21 @@
       <!-- Time Interval (Start / End Hours) -->
       <div class="time-range-group">
         <div class="form-group">
-          <label for="start-hour" class="form-label">Start Time</label>
-          <div class="input-icon-wrapper">
-            <Clock class="icon-input" />
-            <select id="start-hour" v-model="startHour">
-              <option v-for="h in 24" :key="h-1" :value="h-1">
-                {{ formatHour(h-1) }}
-              </option>
-            </select>
-          </div>
+          <label class="form-label">Start Time</label>
+          <HourPicker
+            v-model="startHour"
+            :options="startHourOptions"
+            label="Start Time"
+          />
         </div>
 
         <div class="form-group">
-          <label for="end-hour" class="form-label">End Time</label>
-          <div class="input-icon-wrapper">
-            <Clock class="icon-input" />
-            <select id="end-hour" v-model="endHour">
-              <option v-for="h in 24" :key="h-1" :value="h-1" :disabled="h-1 <= startHour">
-                {{ formatHour(h-1) }}
-              </option>
-            </select>
-          </div>
+          <label class="form-label">End Time</label>
+          <HourPicker
+            v-model="endHour"
+            :options="endHourOptions"
+            label="End Time"
+          />
         </div>
       </div>
 
@@ -113,9 +107,10 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { MapPin, Calendar, Clock } from '@lucide/vue';
+import { ref, onMounted, computed, watch } from 'vue';
+import { MapPin, Calendar } from '@lucide/vue';
 import { searchLocations } from '../services/weather';
+import HourPicker from './HourPicker.vue';
 
 const props = defineProps({
   loading: {
@@ -143,6 +138,30 @@ const selectedDate = ref(todayString);
 // Default hours
 const startHour = ref(9);
 const endHour = ref(17);
+
+// Hour select options
+const startHourOptions = computed(() => {
+  return Array.from({ length: 24 }, (_, i) => ({
+    value: i,
+    label: formatHour(i),
+    disabled: false
+  }));
+});
+
+const endHourOptions = computed(() => {
+  return Array.from({ length: 24 }, (_, i) => ({
+    value: i,
+    label: formatHour(i),
+    disabled: i <= startHour.value
+  }));
+});
+
+// Watch startHour to keep endHour valid
+watch(startHour, (newStart) => {
+  if (endHour.value <= newStart) {
+    endHour.value = Math.min(23, newStart + 1);
+  }
+});
 
 // Occasions list
 const occasions = ['casual', 'work', 'date', 'party', 'dinner'];
