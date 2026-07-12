@@ -121,7 +121,7 @@ export function getWeatherDescription(code) {
   if (code >= 71 && code <= 77) return { label: "Snowy", type: "cloudy" }; // or snowy
   if (code >= 80 && code <= 82) return { label: "Rain Showers", type: "rainy" };
   if (code >= 85 && code <= 86) return { label: "Snow Showers", type: "cloudy" };
-  if (code >= 95 && code <= 99) return { label: "Thunderstorm", type: "rainy" };
+  if (code >= 95 && code <= 99) return { label: "Thunderstorm", type: "thunder" };
   return { label: "Overcast", type: "cloudy" };
 }
 

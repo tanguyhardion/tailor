@@ -36,8 +36,10 @@
         <div class="detail-item">
           <MapPin class="icon-detail text-gold" />
           <div class="detail-text">
-            <span class="detail-label">Location / Interval</span>
-            <span class="detail-value truncate">{{ locationName }} ({{ timeLabel }})</span>
+            <span class="detail-label">Location</span>
+            <span class="detail-value location-value">{{ locationName }}</span>
+            <span class="detail-sub">{{ dateLabel }}</span>
+            <span class="detail-sub">{{ timeRange }}</span>
           </div>
         </div>
       </div>
@@ -47,7 +49,7 @@
 
 <script setup>
 import { computed } from 'vue';
-import { Sun, Cloud, CloudRain, Droplets, Wind, MapPin } from '@lucide/vue';
+import { Sun, Cloud, CloudRain, CloudLightning, Droplets, Wind, MapPin } from '@lucide/vue';
 import { getWeatherDescription } from '../services/weather';
 
 const props = defineProps({
@@ -59,7 +61,11 @@ const props = defineProps({
     type: String,
     required: true
   },
-  timeLabel: {
+  dateLabel: {
+    type: String,
+    required: true
+  },
+  timeRange: {
     type: String,
     required: true
   }
@@ -80,6 +86,7 @@ const weatherIcon = computed(() => {
   switch (weatherType.value) {
     case 'sunny': return Sun;
     case 'rainy': return CloudRain;
+    case 'thunder': return CloudLightning;
     case 'cloudy': return Cloud;
     default: return Sun;
   }
@@ -150,6 +157,14 @@ const weatherIcon = computed(() => {
 }
 .icon-glow-wrapper.cloudy .large-weather-icon {
   color: #2dd4bf;
+}
+
+.icon-glow-wrapper.thunder {
+  border-color: rgba(139, 92, 246, 0.25);
+  box-shadow: 0 0 30px rgba(139, 92, 246, 0.2);
+}
+.icon-glow-wrapper.thunder .large-weather-icon {
+  color: #a78bfa;
 }
 
 .temp-wrapper {
@@ -224,11 +239,17 @@ const weatherIcon = computed(() => {
   margin-top: 2px;
 }
 
-.truncate {
-  max-width: 180px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.detail-sub {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+  font-weight: 400;
+}
+
+.location-value {
+  max-width: 220px;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 /* Responsive */
@@ -247,7 +268,7 @@ const weatherIcon = computed(() => {
     align-items: flex-start;
     width: 100%;
   }
-  .truncate {
+  .location-value {
     max-width: 100%;
   }
 }

@@ -54,7 +54,8 @@
               <WeatherCard 
                 :weatherData="weather" 
                 :locationName="cityInfo.name" 
-                :timeLabel="formattedTimeLabel"
+                :dateLabel="formattedDateLabel"
+                :timeRange="formattedTimeRange"
               />
 
               <!-- Recommendations Title -->
@@ -147,17 +148,21 @@ const closeSidebar = () => {
 const currentWeatherType = ref('sunny');
 
 // Formatted time description for weather display
-const formattedTimeLabel = computed(() => {
+const formattedDateLabel = computed(() => {
   if (!preferenceDetails.value) return '';
   const dateObj = new Date(preferenceDetails.value.date);
-  const formattedDate = dateObj.toLocaleDateString('en-US', {
+  return dateObj.toLocaleDateString('en-US', {
+    weekday: 'short',
     month: 'short',
-    day: 'numeric',
-    weekday: 'short'
+    day: 'numeric'
   });
+});
+
+const formattedTimeRange = computed(() => {
+  if (!preferenceDetails.value) return '';
   const startStr = `${preferenceDetails.value.startHour.toString().padStart(2, '0')}:00`;
   const endStr = `${preferenceDetails.value.endHour.toString().padStart(2, '0')}:00`;
-  return `${formattedDate}, ${startStr} - ${endStr}`;
+  return `${startStr} – ${endStr}`;
 });
 
 // Trigger outfit generation

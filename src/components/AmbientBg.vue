@@ -5,26 +5,41 @@
     <div class="orb orb-2"></div>
     <div class="orb orb-3"></div>
 
-    <!-- Rain threads layer (only active when rainy) -->
-    <div v-if="weatherType === 'rainy'" class="rain-overlay">
+    <!-- Rain threads layer (active for rainy and thunder) -->
+    <div v-if="weatherType === 'rainy' || weatherType === 'thunder'" class="rain-overlay">
       <div 
-        v-for="n in 30" 
+        v-for="n in rainCount" 
         :key="n" 
         class="weather-rain-thread" 
         :style="getRandomRainStyle()"
+      ></div>
+    </div>
+
+    <!-- Lightning flash layer (only for thunder) -->
+    <div v-if="weatherType === 'thunder'" class="lightning-layer">
+      <div 
+        v-for="n in 3" 
+        :key="`bolt-${n}`" 
+        class="lightning-flash" 
+        :style="getLightningStyle(n)"
       ></div>
     </div>
   </div>
 </template>
 
 <script setup>
-defineProps({
+import { computed } from 'vue';
+
+const props = defineProps({
   weatherType: {
     type: String,
-    default: 'sunny', // 'sunny', 'rainy', 'cloudy', 'night'
-    validator: (val) => ['sunny', 'rainy', 'cloudy', 'night'].includes(val)
+    default: 'sunny', // 'sunny', 'rainy', 'cloudy', 'night', 'thunder'
+    validator: (val) => ['sunny', 'rainy', 'cloudy', 'night', 'thunder'].includes(val)
   }
 });
+
+// Thunder gets heavier rain
+const rainCount = computed(() => props.weatherType === 'thunder' ? 50 : 30);
 
 // Helper to randomize the positioning and speed of falling rain threads
 const getRandomRainStyle = () => {
@@ -39,6 +54,16 @@ const getRandomRainStyle = () => {
     animationDelay: `${delay}s`,
     animationDuration: `${duration}s`,
     opacity: opacity
+  };
+};
+
+// Stagger lightning flashes with different delays and durations
+const getLightningStyle = (index) => {
+  const delay = 1 + index * 3.5 + Math.random() * 2;
+  const duration = 6 + Math.random() * 4;
+  return {
+    animationDelay: `${delay}s`,
+    animationDuration: `${duration}s`
   };
 };
 </script>
@@ -168,6 +193,23 @@ const getRandomRainStyle = () => {
   opacity: 0.1;
 }
 
+/* Theme 5: Thunder (Dark Violet & Electric Indigo) */
+.theme-thunder {
+  background: radial-gradient(circle at top left, #08051a, #030308);
+}
+.theme-thunder .orb-1 {
+  background: #2d1b69;
+  opacity: 0.3;
+}
+.theme-thunder .orb-2 {
+  background: #1a0e3e;
+  opacity: 0.25;
+}
+.theme-thunder .orb-3 {
+  background: #0d1a40;
+  opacity: 0.2;
+}
+
 /* Rain elements */
 .rain-overlay {
   position: absolute;
@@ -176,5 +218,43 @@ const getRandomRainStyle = () => {
   width: 100%;
   height: 100%;
   pointer-events: none;
+}
+
+/* Lightning layer */
+.lightning-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+@keyframes lightningFlash {
+  0%   { opacity: 0; }
+  1%   { opacity: 0; }
+  1.5% { opacity: 0.7; }
+  2%   { opacity: 0; }
+  2.5% { opacity: 0.5; }
+  3%   { opacity: 0; }
+  3.3% { opacity: 0.3; }
+  3.6% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.lightning-flash {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+    ellipse at 50% 0%,
+    rgba(180, 160, 255, 0.35) 0%,
+    rgba(120, 100, 220, 0.12) 30%,
+    transparent 70%
+  );
+  animation: lightningFlash 8s infinite;
+  will-change: opacity;
 }
 </style>
