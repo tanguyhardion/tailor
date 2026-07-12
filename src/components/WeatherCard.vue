@@ -46,8 +46,8 @@
 </template>
 
 <script setup>
-import { computed, defineProps } from 'vue';
-import { Sun, Cloud, CloudRain, Droplets, Wind, MapPin } from 'lucide-vue-next';
+import { computed } from 'vue';
+import { Sun, Cloud, CloudRain, Droplets, Wind, MapPin } from '@lucide/vue';
 import { getWeatherDescription } from '../services/weather';
 
 const props = defineProps({

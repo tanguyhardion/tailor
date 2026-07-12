@@ -113,8 +113,8 @@
 </template>
 
 <script setup>
-import { ref, onMounted, defineEmits, defineProps } from 'vue';
-import { MapPin, Calendar, Clock } from 'lucide-vue-next';
+import { ref, onMounted } from 'vue';
+import { MapPin, Calendar, Clock } from '@lucide/vue';
 import { searchLocations } from '../services/weather';
 
 const props = defineProps({

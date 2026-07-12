@@ -108,8 +108,7 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
-import { Shirt, Layers, Scissors, Footprints, Watch, Sparkles } from 'lucide-vue-next';
+import { Shirt, Layers, Scissors, Footprints, Watch, Sparkles } from '@lucide/vue';
 
 const props = defineProps({
   outfit: {

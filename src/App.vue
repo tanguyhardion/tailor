@@ -84,7 +84,7 @@
 
 <script setup>
 import { ref, computed } from 'vue';
-import { Sparkles, ArrowLeft } from 'lucide-vue-next';
+import { Sparkles, ArrowLeft } from '@lucide/vue';
 import AmbientBg from './components/AmbientBg.vue';
 import PreferenceForm from './components/PreferenceForm.vue';
 import WeatherCard from './components/WeatherCard.vue';
